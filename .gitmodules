@@ -1,0 +1,3 @@
+[submodule "react-hello"]
+	path = react-hello
+	url = /home/kijima/Project/pure-react/react-hello
