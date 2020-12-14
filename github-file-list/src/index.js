@@ -4,6 +4,7 @@ import moment from 'moment';
 import './index.css';
 import PropTypes from 'prop-types';
 import Time from './Time';
+import axios from 'axios';
 
 const FileList = ({ files }) => (
 	<table className="file-list">
@@ -109,10 +110,156 @@ function Parent() {
 function Child({ onAction }) {
     return (
 	    <button onClick={onAction}>
-	    Click Me!
+	    Switch
 	</button>
     );
 }
 
-ReactDOM.render(<FileList files={testFiles}/>,
+// class CountingParent extends React.Component {
+//     constructor(props) {
+// 	super(props);
+
+// 	this.state = {
+// 	    actionCount: 0
+// 	};
+
+// 	this.handleAction = this.handleAction.bind(this);
+//     }
+
+//     handleAction(action) {
+// 	console.log('Child says', action);
+
+// 	this.setState({
+// 	    actionCount: this.state.actionCount + 1
+// 	});
+//     }
+
+//     render() {
+// 	return (
+// 		<div>
+// 		<Child onAction={this.handleAction}/>
+// 		<p>Clicked {this.state.actionCount} times</p>
+// 		</div>
+// 	);
+//     }
+// }
+
+class CountingParent extends React.Component {
+    state = {
+	actionCount: 0
+    };
+
+    handleAction = (action) => {
+	console.log('Child says', action);
+
+	this.setState({
+	    actionCount: this.state.actionCount + 1
+	});
+    }
+
+    render() {
+	return (
+		<div>
+		<Child onAction={this.handleAction}/>
+		<p>Clicked {this.state.actionCount} times</p>
+		</div>
+	);
+    }
+}
+
+const Page = () => (
+	<div>
+	<CountingParent/>
+	<CountingParent/>
+	<CountingParent/>
+	</div>
+);
+
+const Switch = () => (
+	<div>
+	<CheckLight/>
+	<CheckLight/>
+	</div>
+);
+
+function ParentL() {
+    return (
+	    <ChildL onAction={handleAction}/>
+    );
+}
+
+function ChildL({ onAction }) {
+    return (
+	    <button onClick={onAction}>
+	    Switch
+	</button>
+    );
+}
+
+class CheckLight extends React.Component {
+    state = {
+	kitchen: 'true',
+	bathroom: false,
+	livingRoom: true,
+	bedroom: false
+    };
+
+    handleAction = (action) => {
+	console.log('Switch', action);
+
+	if (this.state.kitchen == 'true') {
+	this.setState({
+	    kitchen: 'false'
+
+	});
+	} else {
+	this.setState({
+	    kitchen: 'true'
+
+	});
+	}
+    }
+
+    render() {
+	return (
+		<div>
+		<Child onAction={this.handleAction}/>
+		<p>Light: {this.state.kitchen}</p>
+		</div>
+	);
+    }
+}
+
+axios.get(`http://www.reddit.com/r/reactjs.json`)
+    .then(response => {
+	const posts = response.data.data.children.map(
+	    obj => obj.data
+	);
+	console.log(posts);
+    })
+    .catch(error => {
+	console.error(error);
+    });
+
+fetch(`http://www.reddit.com/r/reactjs.json`)
+    .then(response => {
+	if(response.ok) {
+	    return response.json();
+	}
+	throw new Error('Request failed');
+    })
+    .then(json => {
+	const posts = res.data.data.children.map(
+	    obj => obj.data
+	);
+	console.log(posts);
+    })
+    .catch(error => {
+	console.error(error);
+    });
+
+ReactDOM.render(<Switch/>,
 		document.querySelector('#root'));
+
+// ReactDOM.render(<FileList files={testFiles}/>,
+// 		document.querySelector('#root'));
