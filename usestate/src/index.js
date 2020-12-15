@@ -148,6 +148,24 @@ const MultiCounter = () => {
 }
 
 ReactDOM.render(
-	<MultiCounter />,
+	<Light />,
     document.querySelector('#root')
 );
+
+// -------------
+
+function Light() {
+    const [toggles, setToggles] = useState(0);
+
+    function toggle() {
+	setToggles(toggles => !toggles);
+    }
+    return (
+	    <>
+	    <button onClick={toggle}>ON/OFF</button>
+	    <br/>
+	    部屋は{toggles ? '明るい' : '暗い'}
+	    </>
+    );
+}
+// ------------
