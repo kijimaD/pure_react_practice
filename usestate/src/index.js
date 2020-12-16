@@ -148,7 +148,7 @@ const MultiCounter = () => {
 }
 
 ReactDOM.render(
-	<Light />,
+	<AudioControl />,
     document.querySelector('#root')
 );
 
@@ -169,3 +169,34 @@ function Light() {
     );
 }
 // ------------
+
+function AudioControl() {
+    const [volume, setVolume] = useState(50);
+    const [treble, setTreble] = useState(50);
+
+    function incrementVolume() {
+	setVolume(volume => volume + 1);
+    }
+    function decrementVolume() {
+	setVolume(volume => volume - 1);
+    }
+    function incrementTreble() {
+	setTreble(treble => treble + 1);
+    }
+    function decrementTreble() {
+	setTreble(treble => treble - 1);
+    }
+
+    return (
+	    <>
+	    <button onClick={decrementVolume}>-</button>
+	    volume:{volume}
+	    <button onClick={incrementVolume}>+</button>
+	    <br/>
+	    <button onClick={decrementTreble}>-</button>
+	    treble:{treble}
+	    <button onClick={incrementTreble}>+</button>
+	    </>
+    );
+
+}
