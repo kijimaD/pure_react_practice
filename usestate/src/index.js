@@ -18,11 +18,11 @@ class OneTimeButton extends React.Component {
 
     render() {
 	return (
-		<button
-	    onClick={this.handleClick}
-	    disabled={this.state.clicked}
-		>
-		You Can Only Click Me Once
+	    <button
+	      onClick={this.handleClick}
+	      disabled={this.state.clicked}
+	    >
+	      You Can Only Click Me Once
 	    </button>
 	);
     }
@@ -473,16 +473,18 @@ class OneTimeButton extends React.Component {
 
 const reducer = (state, action) => {
     switch (action.type) {
-	case 'add':
-	    return [
-		...state,
-		{
-		    id: state.length,
-		    name: action.name
-		}
-	    ];
-	default:
-	    return state;
+    case 'add':
+	return [
+	    ...state,
+	    {
+		id: state.length,
+		name: action.name
+	    }
+	];
+    case 'remove':
+	return state.filter((_, index) => index !== action.index);
+    default:
+	return state;
     }
 };
 
@@ -498,24 +500,29 @@ function ShoppingList() {
 	});
 	inputRef.current.value = '';
     }
-	return (
-	    <>
-	    <form onSubmit={handleSubmit}>
+    return (
+	<>
+	  <form onSubmit={handleSubmit}>
 	    <input ref={inputRef} />
-	    </form>
-	    <ul>
+	  </form>
+	  <ul>
 	    {items.map((item, index) => (
 		<li key={item.id}>
-		{item.name}
+		    {item.id}. {item.name}
+		    <button
+		onClick={() => dispatch({ type: 'remove', index })}
+		    >
+		    x
+		</button>
 		</li>
 	    ))}
-	    </ul>
-	    </>
-	);
+	  </ul>
+	</>
+    );
 
 }
 
 ReactDOM.render(
-	<ShoppingList />,
+    <ShoppingList />,
     document.querySelector('#root')
 );
