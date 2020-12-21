@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 // import React, { useEffect, useState, useRef } from 'react';
 import React, { useEffect, useState } from 'react';
 
+
 // class OneTimeButton extends React.Component {
 //     state = {
 // 	clicked: false
@@ -673,49 +674,76 @@ import React, { useEffect, useState } from 'react';
 
 // --------------------
 
-function Reddit({ subreddit }) {
-    const [posts, setPosts] = useState([]);
+// function Reddit({ subreddit }) {
+//     const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-	fetch(
-	    `https://www.reddit.com/r/${subreddit}.json`
-	)
-	    .then(res => res.json())
-	.then(json =>
-	      setPosts(json.data.children.map(c => c.data))
-	     )
-    }, [subreddit, setPosts]);
+//     useEffect(() => {
+// 	fetch(
+// 	    `https://www.reddit.com/r/${subreddit}.json`
+// 	)
+// 	    .then(res => res.json())
+// 	.then(json =>
+// 	      setPosts(json.data.children.map(c => c.data))
+// 	     )
+//     }, [subreddit, setPosts]);
 
-    return (
-	    <ul>
-	    {posts.map(post => (
-		<li key={post.id}>{post.title}</li>
-	    ))}
-	</ul>
-    );
-}
+//     return (
+// 	    <ul>
+// 	    {posts.map(post => (
+// 		<li key={post.id}>{post.title}</li>
+// 	    ))}
+// 	</ul>
+//     );
+// }
+
+// function App() {
+//     const [inputValue, setValue] = useState("reactjs");
+//     const [subreddit, setSubreddit] = useState(inputValue);
+
+// const handleSubmit = e => {
+//     e.preventDefault();
+//     setSubreddit(inputValue);
+// };
+
+//     return (
+// 	    <>
+// 	    <form onSubmit={handleSubmit}>
+// 	    <input
+// 	value={inputValue}
+// 	onChange={e => setValue(e.target.value)}
+// 	    />
+// 	    </form>
+// 	    <Reddit subreddit={subreddit} />
+// 	    </>
+//     );
+// }
+
+// --------------------
 
 function App() {
     const [inputValue, setValue] = useState("reactjs");
-    const [subreddit, setSubreddit] = useState(inputValue);
-
-const handleSubmit = e => {
-    e.preventDefault();
-    setSubreddit(inputValue);
-};
 
     return (
 	    <>
-	    <form onSubmit={handleSubmit}>
+	    <form>
 	    <input
 	value={inputValue}
 	onChange={e => setValue(e.target.value)}
 	    />
-	    </form>
-	    <Reddit subreddit={subreddit} />
+ 	    </form>
+	    {document.title = inputValue}
+	    <title>
+	    aa
+	    </title>
 	    </>
     );
 }
+
+// --------------------
+
+
+
+// --------------------
 
 ReactDOM.render(
 	<App />,
