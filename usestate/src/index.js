@@ -3,30 +3,32 @@ import ReactDOM from 'react-dom';
 // import React, { useState } from 'react';
 // import React, { useRef } from 'react';
 // import React, { useReducer }  from 'react';
-import React, { useReducer, useRef } from 'react';
+// import React, { useReducer, useRef } from 'react';
+// import React, { useState, useEffect } from 'react';
+// import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
+// class OneTimeButton extends React.Component {
+//     state = {
+// 	clicked: false
+//     }
 
-class OneTimeButton extends React.Component {
-    state = {
-	clicked: false
-    }
+//     handleClick = () => {
+// 	this.props.onClick();
+// 	this.setState({ clicked: true });
+//     }
 
-    handleClick = () => {
-	this.props.onClick();
-	this.setState({ clicked: true });
-    }
-
-    render() {
-	return (
-	    <button
-	      onClick={this.handleClick}
-	      disabled={this.state.clicked}
-	    >
-	      You Can Only Click Me Once
-	    </button>
-	);
-    }
-}
+//     render() {
+// 	return (
+// 	    <button
+// 	      onClick={this.handleClick}
+// 	      disabled={this.state.clicked}
+// 	    >
+// 	      You Can Only Click Me Once
+// 	    </button>
+// 	);
+//     }
+// }
 
 // ReactDOM.render(
 // 	<OneTimeButton onClick={() => alert("hi")}/>,
@@ -471,58 +473,252 @@ class OneTimeButton extends React.Component {
 // );
 // }
 
-const reducer = (state, action) => {
-    switch (action.type) {
-    case 'add':
-	return [
-	    ...state,
-	    {
-		id: state.length,
-		name: action.name
-	    }
-	];
-    case 'remove':
-	return state.filter((_, index) => index !== action.index);
-    default:
-	return state;
-    }
+// ----------
+
+// const reducer = (state, action) => {
+//     switch (action.type) {
+//     case 'add':
+// 	return [
+// 	    ...state,
+// 	    {
+// 		id: state.length,
+// 		name: action.name
+// 	    }
+// 	];
+//     case 'remove':
+// 	return state.filter((_, index) => index !== action.index);
+//     case 'clear':
+// 	return [];
+//     default:
+// 	return state;
+//     }
+// };
+
+// function ShoppingList() {
+//     const inputRef = useRef();
+//     const [items, dispatch] = useReducer(reducer, []);
+
+//     function handleSubmit(e) {
+// 	e.preventDefault();
+// 	dispatch({
+// 	    type: 'add',
+// 	    name: inputRef.current.value
+// 	});
+// 	inputRef.current.value = '';
+//     }
+//     return (
+// 	<>
+// 	  <form onSubmit={handleSubmit}>
+// 	    <input ref={inputRef} />
+// 	  </form>
+// 	  <ul>
+// 	    {items.map((item, index) => (
+// 		<li key={item.id}>
+// 		    {item.id}. {item.name}
+// 		    <button
+// 		onClick={() => dispatch({ type: 'remove', index })}
+// 		    >
+// 		    x
+// 		</button>
+// 		</li>
+// 	    ))}
+// 	</ul>
+// 	    <button
+// 	onClick={() => dispatch({ type: 'clear'})}>
+// 	    Clear
+// 	    </button>
+// 	</>
+//     );
+
+// }
+
+// --------------------
+// できぬ
+
+// let lights = ["off", "low", "medium", "high"];
+// const reducer = (state, action) => {
+//     switch (action.type) {
+//     case 'add':
+// 	return {
+// 	    count: state + 5,
+// 	    level: lights[(state + action) %4]
+// 	};
+//     default:
+// 	return {
+// 	    count: state,
+// 	    level: lights[(state + action) %4]
+// 	}
+//     }
+// };
+
+
+// function Light() {
+//     const [results, dispatch] = useReducer(reducer, []);
+//     return (
+// 	    <>
+// 	    {results.count}
+// 	    {results.level}
+// 	    <button onClick={() => dispatch({type: 'add'})}>
+// 	    Toggle
+// 	</button>
+// 	    </>
+//     )
+// }
+
+// const reducer = (state, action) => {
+//     switch (action.type) {
+//     case 'add':
+// 	return [
+// 	    ...state,
+// 	    {
+// 		id: state.length,
+// 		name: action.name
+// 	    }
+// 	];
+//     case 'remove':
+// 	return state.filter((_, index) => index !== action.index);
+//     case 'clear':
+// 	return [];
+//     default:
+// 	return state;
+//     }
+// };
+
+// --------------------
+// const LogEffect = () => {
+//     const [text, setText] = useState('');
+
+//     useEffect(() => {
+// 	console.log('latest value:', text);
+//     });
+
+//     return (
+// 	    <input
+// 	value={text}
+// 	onChange={e => setText(e.target.value)}
+// 	/>
+//     );
+// };
+
+// --------------------
+
+// const LogEffect = () => {
+//     const [text, setText] = useState('');
+
+//     useEffect(() => {
+// 	if(text === '1234') {
+// 	    setText("goal");
+// }
+//     }, [text]);
+
+//     return (
+// 	    <>
+// 	    {text}<br/>
+// 	    <input
+// 	value={text}
+// 	onChange={e => setText(e.target.value)}
+// 	    />
+// 	    </>
+//     );
+// };
+
+// --------------------
+
+// function App() {
+//     const inputRef = useRef();
+
+//     const [value, setValue] = useState("");
+
+//     useEffect(
+// 	() => {
+// 	    // console.log("render");
+// 	    // inputRef.current.focus();
+// 	    console.log('mounted');
+// 	    return () => console.log('unmounting...');
+// 	},
+// 	// [inputRef]
+// 	[]
+//     );
+
+//     return (
+// 	    <input
+// 	ref={inputRef}
+// 	value={value}
+// 	onChange={e => setValue(e.target.value)}
+// 	/>
+//     );
+// }
+
+// --------------------
+
+// function Reddit() {
+//     const [posts, setPosts] = useState([]);
+
+//     useEffect(() => {
+// 	fetch("https://www.reddit.com/r/reactjs.json")
+// 	    .then(res => res.json())
+// 	.then(json =>
+// 	      setPosts(json.data.children.map(c => c.data))
+// 	     );
+//     },[setPosts]);
+
+//     return (
+// 	    <ul>
+// 	    {posts.map(post => (
+// 		<li key={post.id}>{post.title}</li>
+// 	    ))}
+// 	</ul>
+//     );
+// }
+
+// --------------------
+
+function Reddit({ subreddit }) {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+	fetch(
+	    `https://www.reddit.com/r/${subreddit}.json`
+	)
+	    .then(res => res.json())
+	.then(json =>
+	      setPosts(json.data.children.map(c => c.data))
+	     )
+    }, [subreddit, setPosts]);
+
+    return (
+	    <ul>
+	    {posts.map(post => (
+		<li key={post.id}>{post.title}</li>
+	    ))}
+	</ul>
+    );
+}
+
+function App() {
+    const [inputValue, setValue] = useState("reactjs");
+    const [subreddit, setSubreddit] = useState(inputValue);
+
+const handleSubmit = e => {
+    e.preventDefault();
+    setSubreddit(inputValue);
 };
 
-function ShoppingList() {
-    const inputRef = useRef();
-    const [items, dispatch] = useReducer(reducer, []);
-
-    function handleSubmit(e) {
-	e.preventDefault();
-	dispatch({
-	    type: 'add',
-	    name: inputRef.current.value
-	});
-	inputRef.current.value = '';
-    }
     return (
-	<>
-	  <form onSubmit={handleSubmit}>
-	    <input ref={inputRef} />
-	  </form>
-	  <ul>
-	    {items.map((item, index) => (
-		<li key={item.id}>
-		    {item.id}. {item.name}
-		    <button
-		onClick={() => dispatch({ type: 'remove', index })}
-		    >
-		    x
-		</button>
-		</li>
-	    ))}
-	  </ul>
-	</>
+	    <>
+	    <form onSubmit={handleSubmit}>
+	    <input
+	value={inputValue}
+	onChange={e => setValue(e.target.value)}
+	    />
+	    </form>
+	    <Reddit subreddit={subreddit} />
+	    </>
     );
-
 }
 
 ReactDOM.render(
-    <ShoppingList />,
+	<App />,
+
     document.querySelector('#root')
 );
