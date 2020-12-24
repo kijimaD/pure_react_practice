@@ -6,7 +6,9 @@ import ReactDOM from 'react-dom';
 // import React, { useReducer, useRef } from 'react';
 // import React, { useState, useEffect } from 'react';
 // import React, { useEffect, useState, useRef } from 'react';
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React, { useState, useContext } from 'react';
+import './index.css';
 
 
 // class OneTimeButton extends React.Component {
@@ -720,33 +722,365 @@ import React, { useEffect, useState } from 'react';
 
 // --------------------
 
-function App() {
-    const [inputValue, setValue] = useState("reactjs");
+// function App() {
+//     const [inputValue, setValue] = useState("reactjs");
 
-    return (
-	    <>
-	    <form>
-	    <input
-	value={inputValue}
-	onChange={e => setValue(e.target.value)}
-	    />
- 	    </form>
-	    {document.title = inputValue}
-	    <title>
-	    aa
-	    </title>
-	    </>
-    );
-}
+//     return (
+// 	    <>
+// 	    <form>
+// 	    <input
+// 	value={inputValue}
+// 	onChange={e => setValue(e.target.value)}
+// 	    />
+//  	    </form>
+// 	    {document.title = inputValue}
+// 	    <title>
+// 	    aa
+// 	    </title>
+// 	    </>
+//     );
+// }
 
 // --------------------
 
+// const UserAvatar = ({ user, size }) => (
+// 	<img
+//     className={`user-avatar ${size || '' }`}
+//     alt="user avatar"
+//     src={user.avatar}
+//     />
+// );
 
+// const UserStats = ({ user }) => (
+//     <div className="user-stats">
+//       <div>
+//   	<UserAvatar user={user} />
+//   	{user.name}
+//       </div>
+//       <div className="stats">
+// 	<div>{user.followers} Followers</div>
+// 	<div>Following {user.following}</div>
+//       </div>
+//     </div>
+// );
+
+// const Nav = ({ user }) => (
+//     <div className="nav">
+//         <UserAvatar user={user} size="small" />
+//     </div>
+// );
+
+// const Content = () => (
+//     <div className="content">main content here</div>
+// );
+
+// const Sidebar = ({ user }) => (
+//     <div className="sidebar">
+//     <UserStats user={user} />
+//     </div>
+// );
+
+// const Body = ({ user }) => (
+//     <div className="body">
+//       <Sidebar user={user} />
+//       <Sidebar user={user} />
+//     </div>
+// );
+
+// class App extends React.Component {
+// state = {
+//     user: {
+//         avatar:
+//         'https://www.gravatar.com/avatar/5c3dd2d257ff0e14dbd2583485dbd44b',
+//         name: 'Dave',
+//         followers: 1234,
+//         following: 123
+//     }
+// };
+
+//     render() {
+//         const { user } = this.state;
+
+//         return (
+//             <div className="app">
+//               <Nav user={user} />
+//               <Body user={user} />
+//             </div>
+//         );
+// }
+// }
+
+// --------------------
+
+// const UserAvatar = ({ user, size }) => (
+//     <img
+//       className={`user-avatar ${size || ''}`}
+//       alt="user avatar"
+//       src={user.avatar}
+//     />
+// );
+
+// const UserStats = ({ user }) => (
+//     <div className="user-stats">
+//       <div>
+// 	<UserAvatar user={user} />
+// 	{user.name}
+//       </div>
+//       <div className="stats">
+// 	<div>{user.followers} Followers</div>
+// 	<div>Following {user.following}</div>
+//       </div>
+//     </div>
+// );
+
+// const Nav = ({ children }) => (
+//     <div className="nav">{children}</div>
+// );
+
+// const Content = () => (
+//     <div className="content">main content here</div>
+// );
+
+// const Sidebar = ({ children }) => (
+//     <div className="sidebar">{children}</div>
+// );
+
+// const Body = ({ sidebar, content }) => (
+//     <div className="body">
+//       <Sidebar>{sidebar}</Sidebar>
+//       {content}
+// </div>
+// );
+
+// class App extends React.Component {
+//     state = {
+//         user: {
+//             avatar:
+//             'https://www.gravatar.com/avatar/5c3dd2d257ff0e14dbd2583485dbd44b',
+//             name: 'Dave',
+//             followers: 1234,
+//             following: 123
+//         }
+//     };
+
+//     render() {
+//         const { user } = this.state;
+
+//         return (
+//             <div className="app">
+//               <Nav>
+//                 <UserAvatar user={user} size="small" />
+//               </Nav>
+//               <Body sidebar={<UserStats user={user} />}
+//                     content={<Content />}
+//               />
+//             </div>
+//         );
+// }
+// }
+
+// --------------------
+
+// const UserContext = React.createContext();
+
+// const UserAvatar = ({ size }) => (
+//     <UserContext.Consumer>
+//       {user => (
+//           <img
+//             className={`user-avatar ${size || ""}`}
+//             alt="user avatar"
+//             src={user.avatar}
+//           />
+//       )}
+//     </UserContext.Consumer>
+// );
+
+// const UserStats = () => (
+//     <UserContext.Consumer>
+//       {user => (
+//           <div className="user-stats">
+//             <div>
+//               <UserAvatar user={user} />
+//               {user.name}
+//             </div>
+//             <div className="stats">
+//               <div>{user.followers} Followers</div>
+//               <div>Following {user.following}</div>
+//             </div>
+//           </div>
+//       )}
+//     </UserContext.Consumer>
+// );
+
+// const Nav = () => (
+//     <div className="nav">
+//       <UserAvatar size="small" />
+// </div>
+// );
+
+// const Content = () => (
+//     <div className="content">
+//       main content here
+// </div>
+// );
+
+// const Sidebar = () => (
+//     <div className="sidebar">
+//       <UserStats />
+// </div>
+// );
+
+// const Body = () => (
+//     <div className="body">
+//       <Sidebar />
+//       <Content />
+//     </div>
+// );
+
+// class App extends React.Component {
+//     state = {
+//         user: {
+//             avatar: 'https://www.gravatar.com/avatar/5c3dd2d257ff0e14dbd2583485dbd44b',
+//             name: "Dave",
+//             followers: 1234,
+//             following: 123
+// }
+//     };
+
+//     render() {
+//         return (
+//             <div className="app">
+//               <UserContext.Provider value={this.state.user}>
+//                 <Nav />
+//                 <Body />
+//               </UserContext.Provider>
+//             </div>
+//         );
+// }
+// }
+
+// --------------------
+
+// function withUser(Component) {
+//     return function ConnectedComponent(props) {
+//         return (
+//             <UserContext.Consumer>
+//               {user => <Component {...props} user={user}/>}
+//             </UserContext.Consumer>
+//         );
+// }
+// }
+
+// const UserAvatar = withUser(({ size, user }) => (
+//     <img
+//       className={`user-avatar ${size || ""}`}
+//       alt="user avatar"
+//       src={user.avatar}
+// />
+// )
+
+// class UserStore extends React.Component {
+//     state = {
+//         user: {
+//             avatar:
+//             'https://www.gravatar.com/avatar/5c3dd2d257ff0e14dbd2583485dbd44b',
+//             name: "Dave",
+//             followers: 1234,
+//             following: 123
+//         }
+//     };
+
+//     render() {
+//         return (
+//             <UserContext.Provider value={this.state.user}>
+//               {this.props.children}
+//             </UserContext.Provider>
+//         );
+//     }
+// }
+//     const App = () => (
+//         <div className="app">
+//           <Nav />
+//           <Body />
+//         </div>
+//     );
+
+// --------------------
+
+// const Something = () => (
+//     <UserContext.Consumer>
+//       {user => (
+//           <LanguageContext.Consumer>
+//             {lang => (
+//                 <ThemeContext.Consumer>
+//                   {theme => (
+//                       <div>ugh</div>
+//                   )}
+//                 </ThemeContext.Consumer>
+//             )}
+//           </LanguageContext.Consumer>
+//       )}
+//     </UserContext.Consumer>
+// )
+
+// const Something = () => {
+//     const user = useContext(UserContext);
+//     const lang = useContext(LanguageContext);
+//     const theme = useContext(ThemeContext);
+
+//     return <div>yay!</div>
+// }
+
+// --------------------
+
+// const RoomContext = React.createContext();
+
+// function RoomStore({ children }) {
+//     const [isLit, setLit] = useState(false);
+
+//     const toggleLight = () => {
+//         setLit(!isLit);
+//     };
+
+//     return (
+//         <RoomContext.Provider
+//           value={{
+//               isLit,
+//               onToggleLight: toggleLight
+//           }}
+//         >
+//           {children}
+//         </RoomContext.Provider>
+//     );
+// }
+
+// const Room = () => {
+//     const { isLit, onToggleLight } = useContext(RoomContext);
+
+//     return (
+//         <div className={`room ${
+// isLit ? 'lit' : 'dark'}`}>
+//           The room is {isLit ? 'lit' : 'dark'}.
+//           <br />
+//           <button onClick={onToggleLight}>
+//             Flip
+//           </button>
+//         </div>
+//     );
+// };
+
+// const App = () => (
+//     <div className="app">
+//       <Room />
+//     </div>
+// );
 
 // --------------------
 
 ReactDOM.render(
-	<App />,
-
+    <RoomStore>
+    <App />
+    </RoomStore>
+    ,
     document.querySelector('#root')
 );
